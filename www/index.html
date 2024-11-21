@@ -248,15 +248,8 @@ function updatePost(postId) {
         updatedAt: firebase.database.ServerValue.TIMESTAMP
     };
 
-    postsRef.child(postId).rupdate()
-        .then(() => {
-            showMessage('投稿を更新しました');
-            $(`#post-${postId}`).removeClass('editing');
-            animateUpdate(postId);
-        })
-        .catch((error) => {
-            showMessage('更新に失敗しました：' + error.message, 'error');
-        });
+    postsRef.child(postId).update({ content: contentVal,
+    updatedAt: firebase.database.ServerValue.TIMESTAMP });
 }
 
 // 投稿の削除：バグ入りなので要修正（削除せずに本文を「削除されました」にして更新してしまう）
